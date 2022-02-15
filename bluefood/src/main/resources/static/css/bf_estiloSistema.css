@@ -1,0 +1,40 @@
+*
+{
+    font-family: "Verdana";    
+}
+
+body
+{
+    text-align: center; /* alinhamento do elemento*/
+    margin: 0px 0px 0px 0px; /* Definir a margem que o elemento tem*/
+}
+
+a
+{
+    color: #000000;
+    text-decoration: none;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+div#divLogotipoSistema
+{
+    background-color: #1e9bde; /* cor do plano de fundo da logo */
+    height: 70px; /* altura */    
+}
+
+img#imgLogotipoSistema
+{
+    height: 60%; /*altura*/
+    vertical-align: middle; /* alinhamento vertical */
+}
+
+span#spanAuxiliarDeAlinhamentoVertical
+{
+    display: inline-block; /*a imagem assuma 
+    height: 100%;
+    vertical-align: middle; /* alinhamento vertical */
+}
