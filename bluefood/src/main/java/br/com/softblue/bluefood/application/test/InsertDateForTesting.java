@@ -89,7 +89,7 @@ public class InsertDateForTesting {
 		r.setCnpj("18211168000104");
 		r.setTaxaEntrega(BigDecimal.valueOf(9.8));
 		r.setTelefone("11946685541");
-		r.getCategorias().add(categoriaSanduiche);
+		r.getCategorias().add(categoriaPizza);
 		r.getCategorias().add(categoriaSobremesa);
 		r.setLogotipo("0004-logo.png");
 		r.setTempoEntregaBase(22);
