@@ -13,6 +13,8 @@ import br.com.softblue.bluefood.domain.cliente.Cliente;
 import br.com.softblue.bluefood.domain.cliente.ClienteRepository;
 import br.com.softblue.bluefood.domain.restaurante.CategoriaRestaurante;
 import br.com.softblue.bluefood.domain.restaurante.CategoriaRestauranteRepository;
+import br.com.softblue.bluefood.domain.restaurante.ItemCardapio;
+import br.com.softblue.bluefood.domain.restaurante.ItemCardapioRepository;
 import br.com.softblue.bluefood.domain.restaurante.Restaurante;
 import br.com.softblue.bluefood.domain.restaurante.RestauranteRepository;
 import br.com.softblue.bluefood.util.StringUtils;
@@ -29,10 +31,14 @@ public class InsertDateForTesting {
 	@Autowired
 	private CategoriaRestauranteRepository categoriaRestauranteRepository;
 	
+	@Autowired
+	private ItemCardapioRepository itemCardapioRepository;
+	
 	@EventListener // método para ser invocado no momento em que a aplicação termina de iniciar
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		clientes();
 		Restaurante[] restaurantes = restaurantes();
+		itensCardapio(restaurantes);
 	}
 	
 	private Restaurante[] restaurantes() {
@@ -55,6 +61,7 @@ public class InsertDateForTesting {
 		r.setLogotipo("0001-logo.png");
 		r.setTempoEntregaBase(30);
 		restauranteRepository.save(r);
+		restaurantes.add(r);
 		
 		r = new Restaurante();
 		r.setNome("Mc Naldo's");
@@ -68,6 +75,7 @@ public class InsertDateForTesting {
 		r.setLogotipo("0002-logo.png");
 		r.setTempoEntregaBase(25);
 		restauranteRepository.save(r);
+		restaurantes.add(r);
 		
 		r = new Restaurante();
 		r.setNome("Sbubby");
@@ -81,6 +89,7 @@ public class InsertDateForTesting {
 		r.setLogotipo("0003-logo.png");
 		r.setTempoEntregaBase(38);
 		restauranteRepository.save(r);
+		restaurantes.add(r);
 		
 		r = new Restaurante();
 		r.setNome("Pizza Brut");
@@ -94,6 +103,8 @@ public class InsertDateForTesting {
 		r.setLogotipo("0004-logo.png");
 		r.setTempoEntregaBase(22);
 		restauranteRepository.save(r);
+		restaurantes.add(r);
+		
 		
 		
 		r = new Restaurante();
@@ -108,6 +119,7 @@ public class InsertDateForTesting {
 		r.setLogotipo("0005-logo.png");
 		r.setTempoEntregaBase(19);
 		restauranteRepository.save(r);
+		restaurantes.add(r);
 		
 		Restaurante[] array = new Restaurante[restaurantes.size()];
 		return restaurantes.toArray(array);
@@ -124,6 +136,7 @@ public class InsertDateForTesting {
 		c.setCpf("39760326892");
 		c.setTelefone("11946685548");
 		clienteRepository.save(c);
+		clientes.add(c);
 		
 		c = new Cliente();
 		c.setNome("Tunico Bim");
@@ -133,10 +146,73 @@ public class InsertDateForTesting {
 		c.setCpf("39760326895");
 		c.setTelefone("11946685544");
 		clienteRepository.save(c);
+		clientes.add(c);
 		
 		Cliente[] array = new Cliente[clientes.size()];
 		return clientes.toArray(array);
 		
+	}
+	
+	private void itensCardapio(Restaurante[] restaurantes) {
+		ItemCardapio ic = new ItemCardapio();
+		ic.setCategoria("Sanduíche");
+		ic.setDescricao("Delicioso sanduíche com molho");
+		ic.setNome("Double Cheese Burguer Special");
+		ic.setPreco(BigDecimal.valueOf(23.80));
+		ic.setRestaurante(restaurantes[0]);
+		ic.setDestaque(true);
+		ic.setImagem("0001-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Sanduíche");
+		ic.setDescricao("Sanduíche natural com peito de peru");
+		ic.setNome("Sanduíche Natural da Casa");
+		ic.setPreco(BigDecimal.valueOf(11.20));
+		ic.setRestaurante(restaurantes[0]);
+		ic.setDestaque(false);
+		ic.setImagem("0007-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Bebida");
+		ic.setDescricao("Refrigerante com gás");
+		ic.setNome("Refrigerante tradicional");
+		ic.setPreco(BigDecimal.valueOf(9));
+		ic.setRestaurante(restaurantes[0]);
+		ic.setDestaque(false);
+		ic.setImagem("0004-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Bebida");
+		ic.setDescricao("Suco Natural e docinho");
+		ic.setNome("Suco de laranja");
+		ic.setPreco(BigDecimal.valueOf(9));
+		ic.setRestaurante(restaurantes[0]);
+		ic.setDestaque(false);
+		ic.setImagem("0005-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Pizza");
+		ic.setDescricao("Pizza deliciosa");
+		ic.setNome("Pizza de muçarela");
+		ic.setPreco(BigDecimal.valueOf(38.90));
+		ic.setRestaurante(restaurantes[3]);
+		ic.setDestaque(false);
+		ic.setImagem("0002-comida.png");
+		itemCardapioRepository.save(ic);
+		
+		ic = new ItemCardapio();
+		ic.setCategoria("Japonesa");
+		ic.setDescricao("Delicioso hot holl");
+		ic.setNome("Hot holl");
+		ic.setPreco(BigDecimal.valueOf(16.80));
+		ic.setRestaurante(restaurantes[4]);
+		ic.setDestaque(false);
+		ic.setImagem("0003-comida.png");
+		itemCardapioRepository.save(ic);
 	}
 	
 	

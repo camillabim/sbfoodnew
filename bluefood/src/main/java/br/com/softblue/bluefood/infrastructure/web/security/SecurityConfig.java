@@ -1,11 +1,18 @@
 package br.com.softblue.bluefood.infrastructure.web.security;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration //para o spring saber que é uma classe para configuração de alguma coisa
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	@Bean
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new AuthenticationSuccessHandlerImpl();
+	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { //definir como vai funcionar o processo de autenticação
@@ -19,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.formLogin()//vou usar um formulario para fazer autenticação
 				.loginPage("/login")//utiliza esse padrão para autenticar
 				.failureUrl("/login-error") //ir para a pagina de erro de login
-				//.successHandler(null) // para ser chamado quando n der certo
+				.successHandler(authenticationSuccessHandler()) // para ser chamado quando der certo
 				.permitAll() 
 			.and()
 				.logout()
